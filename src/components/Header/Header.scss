@@ -1,0 +1,23 @@
+@import '../../utils/index.scss';
+
+.header {
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  border: 2px solid $border-color;
+
+  @include onDesktop {
+    width: 600px;
+  }
+}
+
+.title {
+  line-height: 15px;
+  font-weight: 500;
+  font-size: 30px;
+
+  @include onDesktop {
+    line-height: 30px;
+  }
+}

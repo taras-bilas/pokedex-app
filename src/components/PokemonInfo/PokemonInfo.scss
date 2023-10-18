@@ -1,0 +1,34 @@
+@import '../../utils/index.scss';
+
+.pokemon__info {
+  width: 250px;
+  padding: 20px;
+  border: 2px solid $border-color;
+
+  &-image {
+    width: 210px;
+    height: 210px;
+  }
+
+  &-data {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-name {
+    font-weight: 400;
+  }
+
+  &-property,
+  &-value {
+    font-weight: 300;
+  }
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td {
+  border: 1px solid $border-color;
+}

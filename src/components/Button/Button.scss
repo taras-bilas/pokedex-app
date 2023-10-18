@@ -1,0 +1,26 @@
+@import '../../utils/index.scss';
+
+.load-more {
+  font-weight: 500;
+  font-size: 20px;
+  grid-column: 1 / -1;
+  width: 200px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $button-color;
+  color: $white-color;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  transition: background-color 0.5s ease;
+
+  &:hover {
+    background-color: $button-hover-color;
+  }
+
+  @include onTablet {
+    width: 100%;
+  }
+}

@@ -1,0 +1,23 @@
+@import '../../utils/index.scss';
+
+.cards {
+  display: flex;
+  flex-direction: column;
+
+  @include onDesktop {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__list {
+    @include pageGrid;
+  }
+
+  &__info {
+    margin-top: 60px;
+
+    @include onDesktop {
+      margin-left: 60px;
+    }
+  }
+}

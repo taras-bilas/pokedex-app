@@ -1,0 +1,35 @@
+@import '../../utils/index.scss';
+
+.pokemon {
+  width: 200px;
+  padding: 20px;
+  border: 2px solid $border-color;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &__image {
+    width: 160px;
+    height: 160px;
+  }
+
+  &__name {
+    font-weight: 400;
+    font-size: 30px;
+  }
+
+  &__types {
+    display: flex;
+  }
+
+  &__type {
+    font-weight: 300;
+    margin-right: 5px;
+    padding: 2px 10px;
+    border-radius: 5px;
+    // background-color: $type-color;
+  }
+}
