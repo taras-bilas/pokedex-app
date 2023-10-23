@@ -7,9 +7,9 @@ const capitalize = (word) => {
 }
 
 export const PokemonInfo = ({ characteristics, pokemonImage }) => {
-  const allPokemonTypes = characteristics.types
-    .map(element => capitalize(element.type.name))
-    .join(', ');
+  const allPokemonTypes = characteristics.types.length > 0
+    ? characteristics.types.map(element => capitalize(element.type.name)).join(', ')
+    : '-';
 
   return (
     <div className="pokemon__info">

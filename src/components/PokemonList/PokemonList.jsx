@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import './PokemonList.scss';
 import axios from 'axios';
 import { PokemonCard } from "../PokemonCard/PokemonCard";
@@ -13,6 +14,8 @@ export const PokemonList = () => {
   const [pokemonImage, setPokemonImage] = useState();
   const [pokemonInfoLoading, setPokemonInfoLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const isDesktop = useMediaQuery({ minWidth: 1200 });
+  const isNotDesktop = useMediaQuery({ maxWidth: 1199 });
 
   const handleCurrentPage = (data) => {
     setCurrentPage(data);
@@ -43,12 +46,23 @@ export const PokemonList = () => {
           ))}
           <Button currentPage={currentPage} handleCurrentPage={handleCurrentPage} />
         </div>
-        {pokemonInfoLoading && (
+        {isDesktop && pokemonInfoLoading && (
           <div className="cards__info">
             <PokemonInfo characteristics={characteristics} pokemonImage={pokemonImage} />
           </div>
         )}
       </div>
+
+      {isNotDesktop && pokemonInfoLoading && (
+        <div className="modal">
+          <div className="modal-inner">
+            <button className="close-button" onClick={() => setPokemonInfoLoading(false)}>X</button>
+            <div className="modal-content">
+              <PokemonInfo characteristics={characteristics} pokemonImage={pokemonImage} />
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }
