@@ -41,7 +41,7 @@ export const PokemonList = () => {
               handlePokemonData={data => setCharacteristics(data)}
               handlePokemonImage={data => setPokemonImage(data)}
               handlePokemonInfoCard={data => setPokemonInfoLoading(data)}
-              key={pokemon.url}
+              key={pokemon.name}
             />
           ))}
           <Button currentPage={currentPage} handleCurrentPage={handleCurrentPage} />

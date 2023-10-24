@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
 import './PokemonInfo.scss';
 
@@ -10,7 +9,7 @@ export const PokemonInfo = ({ characteristics, pokemonImage }) => {
   const allPokemonTypes = characteristics.types.length > 0
     ? characteristics.types.map(element => capitalize(element.type.name)).join(', ')
     : '-';
-
+  
   return (
     <div className="pokemon__info">
       <img
@@ -26,8 +25,8 @@ export const PokemonInfo = ({ characteristics, pokemonImage }) => {
               <td className="pokemon__info-property">Type</td>
               <td className="pokemon__info-value">{allPokemonTypes}</td>
             </tr>
-            {characteristics.stats.map(element => (
-              <tr>
+            {characteristics.stats.map((element, index) => (
+              <tr key={index}>
                 <td className="pokemon__info-property">{capitalize(element.stat.name)}</td>
                 <td className="pokemon__info-value">{element.base_stat}</td>
               </tr>

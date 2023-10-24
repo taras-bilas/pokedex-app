@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import './PokemonCard.scss';
 import axios from 'axios';
+import { Ring } from '@uiball/loaders'
 
 const colorsType = {
   bug: '#b1c12e',
@@ -39,16 +40,24 @@ export const PokemonCard = ({
 }) => {
   const [characteristics, setCharacteristics] = useState();
   const [pokemonImage, setPokemonImage] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    axios.get(`${pokemon.url}`)
-      .then(response => {
-        setCharacteristics(response.data);
-        setPokemonImage(response.data.sprites.other.dream_world.front_default);
-      })
-      .catch(error => {
-        console.error(error);
-      })
+    const getCharacteristics = async () => {
+      setIsLoading(true);
+
+      await axios.get(`${pokemon.url}`)
+        .then(response => {
+          setCharacteristics(response.data);
+          setPokemonImage(response.data.sprites.other.dream_world.front_default);
+        })
+        .catch(error => {
+          console.error(error);
+        })
+        .finally(() => setIsLoading(false))
+    }
+
+    getCharacteristics();
   }, [])
 
   const onCardClick = () => {
@@ -58,22 +67,30 @@ export const PokemonCard = ({
   }
 
   return (
-    <div className="pokemon__card pokemon" onClick={onCardClick}>
-      <img
-        className="pokemon__image"
-        src={pokemonImage}
-        alt="Pokemon image"
-      />
-      <h1 className="pokemon__name">{capitalize(pokemon.name)}</h1>
-      {characteristics && (
-        <div className="pokemon__types">
-          {characteristics.types.map(element => (
-            <div className="pokemon__type" style={{ backgroundColor: colorsType[element.type.name] }}>
-              {capitalize(element.type.name)}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+    isLoading ? (
+      <Ring size={40} lineWeight={5} speed={2} color="black" />
+    ) : (
+      <div className="pokemon__card pokemon" onClick={onCardClick}>
+        <img
+          className="pokemon__image"
+          src={pokemonImage}
+          alt="Pokemon image"
+        />
+        <h1 className="pokemon__name">{capitalize(pokemon.name)}</h1>
+        {characteristics && (
+          <div className="pokemon__types">
+            {characteristics.types.map(element => (
+              <div 
+                className="pokemon__type" 
+                style={{ backgroundColor: colorsType[element.type.name] }}
+                key={element.slot}
+              >
+                {capitalize(element.type.name)}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    )
   )
 }
